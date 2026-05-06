@@ -1,4 +1,4 @@
-package practiceProblem1;
+package practiceProblem1.day1;
 
 //Write a program to demonstrate static variables, methods, and blocks.
 public class StaticDemo {

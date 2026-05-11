@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        int[] arr = {5,2,8,1,11,2,8,4,15};
-        sortArr(arr);
+        int[] arr = {1,2,3,4,5};
+        reverse(arr);
     }
 
     // Java Program to print the elements of an array
@@ -65,9 +65,15 @@ public class Main {
 
     // Java Program to print the elements of an array in reverse order
     public static void reverse(int[] arr){
-        for(int i=arr.length-1;i>=0;i--){
-            System.out.print(arr[i]+" ");
+        int i=0, j = arr.length-1;
+        while(i<j){
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+            j--;
         }
+        System.out.println(Arrays.toString(arr));
     }
 
     // Java Program to print the elements of an array present on odd position

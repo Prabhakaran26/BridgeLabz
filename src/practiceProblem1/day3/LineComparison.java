@@ -29,7 +29,7 @@ public class LineComparison {
             System.out.println("Both lines are equal");
         }
         else{
-            System.out.println("Line is IS bigger");
+            System.out.println("Line 2 is big");
         }
     }
 }

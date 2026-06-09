@@ -24,6 +24,7 @@ public class AddressBookMain {
 
 
 
+
     public static void main(String[] args) {
         System.out.println("===Wecome to Address Book System===");
 
@@ -33,12 +34,13 @@ public class AddressBookMain {
 
         Contact c1 = new Contact("John", "Doe", "123 Main St", "Springfield", "IL", "62701", "555-0101", "john.doe@example.com");
         Contact c2 = new Contact("Jane", "Smith", "456 Oak Ave", "Austin", "TX", "73301", "555-0102", "jane.smith@example.com");
-//        Contact c3 = new Contact("Michael", "Johnson", "789 Pine Rd", "Seattle", "WA", "98101", "555-0103", "mjohnson@example.com");
-//        Contact c4 = new Contact("Emily", "Davis", "321 Maple Blvd", "Denver", "CO", "80201", "555-0104", "emily.davis@example.com");
-//        Contact c5 = new Contact("David", "Wilson", "654 Cedar Ln", "Miami", "FL", "33101", "555-0105", "dwilson@example.com");
 
         addressBook.addContact(c1);
         addressBook.addContact(c2);
+
+        addressBook.editContactUsingName("John","Doe");
+
+        addressBook.display();
 
 
     }

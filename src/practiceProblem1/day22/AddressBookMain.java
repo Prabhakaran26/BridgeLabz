@@ -1,14 +1,14 @@
 package practiceProblem1.day22;
 
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class AddressBookMain {
     static Scanner sc = new Scanner(System.in);
     static AddressBookMain system = new AddressBookMain();
     Map<String, AddressBook> addressBookMap = new HashMap<>();
+    Map<String, List<Contact>> cityStateList = new HashMap<>();
 
 
     public void addContactInAddressBookMap(String name){
@@ -71,11 +71,35 @@ public class AddressBookMain {
         addressBook.deleteContactUsingName(firstName, lastName);
     }
 
-    public void searchPersonByCityOrState_AddressBook(String city, String state){
+    /*public void searchPersonByCityOrState_AddressBook(String city, String state){
         for(String name : addressBookMap.keySet()){
             AddressBook addressBook = system.getAddressBook(name);
-            if(!addressBook.searchBasedOnCityOrState(city,state)){
-                System.out.println("!!!Not Found Any Contacts in '"+name+"' AddressBook in that particular City,State!!!");
+            addressBook.searchBasedOnCityOrState(city,state);
+        }
+    }*/
+
+    public void searchBasedOnCityOrStateToStore(String city, String state){
+
+        List<Contact> list = new ArrayList<>();
+        for (String name : addressBookMap.keySet()){
+            AddressBook addressBook = system.getAddressBook(name);
+            list = addressBook.searchBasedOnCityOrStateToStore(city, state);
+        }
+        list.stream().forEach(c -> System.out.println(c));
+        List<Contact> cityList, stateList;
+        if(!list.isEmpty()) {
+            cityList = list.stream().filter(c -> c.getCity().toLowerCase().equals(city.toLowerCase())).collect(Collectors.toList());
+            stateList = list.stream().filter(c -> c.getState().toLowerCase().equals(state.toLowerCase())).collect(Collectors.toList());
+            cityStateList.put(city,cityList);
+            cityStateList.put(state,stateList);
+        }
+    }
+
+    public void displayCityOrStateList(String city, String state){
+        for (Map.Entry<String,List<Contact>> mp : cityStateList.entrySet()){
+            if(mp.getKey().toLowerCase().equals(city) || mp.getKey().toLowerCase().equals(state)) {
+                System.out.println(mp.getKey());
+                mp.getValue().stream().forEach(c -> System.out.println(c));
             }
         }
     }
@@ -98,10 +122,11 @@ public class AddressBookMain {
             System.out.println("1. Add AddressBook");
             System.out.println("2. Perform Opertions on Particular Address Book");
             System.out.println("3. Search Person based on City or State");
-            System.out.println("4. Exit the Program...");
+            System.out.println("4. To See the Storing Value of City and State");
+            System.out.println("5. Exit the Program...");
             System.out.println("Enter ur Choice: ");
             int choice = sc.nextInt();
-            String name;
+            String name, city, state;
             switch (choice){
                 case 1:
                     System.out.println("Enter a Name for Address Book: ");
@@ -116,12 +141,20 @@ public class AddressBookMain {
                     break;
                 case 3:
                     System.out.println("Enter a State Name to Search" );
-                    String state = sc.next();
+                    state = sc.next();
                     System.out.println("Enter a City Name to Search" );
-                    String city = sc.next();
-                    system.searchPersonByCityOrState_AddressBook(city, state);
+                    city = sc.next();
+                    system.searchBasedOnCityOrStateToStore(city, state);
                     break;
                 case 4:
+                    System.out.println("Enter city :");
+                    city = sc.next().toLowerCase();
+                    System.out.println("Enter state: ");
+                    state = sc.next().toLowerCase();
+                    System.out.println("Displaying the City and State based Persons");
+                    system.displayCityOrStateList(city, state);
+                    break;
+                case 5:
                     return;
             }
         }

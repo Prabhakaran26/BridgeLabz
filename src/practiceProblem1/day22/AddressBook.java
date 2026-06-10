@@ -3,6 +3,7 @@ package practiceProblem1.day22;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBook {
     Scanner sc = new Scanner(System.in);
@@ -103,16 +104,16 @@ public class AddressBook {
         System.out.println("Cotact Not Found while trying to delete");
     }
 
-    public boolean searchBasedOnCityOrState(String city, String state){
-        boolean flag = false;
-        for(Contact c : contacts){
-            if(c.getCity().toLowerCase().equals(city.toLowerCase()) ||
-            c.getState().toLowerCase().equals(state.toLowerCase())){
-                System.out.println(c);
-                flag = true;
-            }
-        }
-        return flag;
+    /*public void searchBasedOnCityOrState(String city, String state){
+        contacts.stream()
+                .filter(c -> c.getState().toLowerCase().equals(state.toLowerCase()) || c.getCity().toLowerCase().equals(city.toLowerCase()))
+                .forEach(c -> System.out.println(c));
+    }*/
+
+    public List<Contact> searchBasedOnCityOrStateToStore(String city, String state){
+        return  contacts.stream()
+                .filter(c -> c.getState().toLowerCase().equals(state.toLowerCase())
+                        || c.getCity().toLowerCase().equals(city.toLowerCase())).collect(Collectors.toList());
     }
 
 

@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class AddressBookMain {
     static Scanner sc = new Scanner(System.in);
-
+    static AddressBookMain system = new AddressBookMain();
     Map<String, AddressBook> addressBookMap = new HashMap<>();
 
 
@@ -27,10 +27,26 @@ public class AddressBookMain {
 
     public void addContact(String name){
         AddressBook addressBook = getAddressBook(name);
-        Contact c1 = new Contact("John", "Doe", "123 Main St", "Springfield", "IL", "62701", "555-0101", "john.doe@example.com");
-        Contact c2 = new Contact("Jane", "Smith", "456 Oak Ave", "Austin", "TX", "73301", "555-0102", "jane.smith@example.com");
+        Contact c1 = new Contact("Rahul", "Sharma", "12 MG Road", "Bengaluru", "KA", "560001", "987-654-3210", "rahul.sharma@example.com");
+        Contact c2 = new Contact("Priya", "Patel", "34 Linking Road", "Mumbai", "MH", "400050", "876-543-2109", "priya.patel@example.com");
+        Contact c3 = new Contact("Karthik", "Raja", "56 Anna Salai", "Chennai", "TN", "600002", "765-432-1098", "karthik.r@example.com");
+        Contact c4 = new Contact("Ananya", "Singh", "78 Connaught Place", "New Delhi", "DL", "110001", "998-877-6655", "ananya.singh@example.com");
+        Contact c5 = new Contact("Vikram", "Reddy", "90 Jubilee Hills", "Hyderabad", "TS", "500033", "887-766-5544", "vikram.reddy@example.com");
+        Contact c6 = new Contact("Neha", "Gupta", "120 Sector 15", "Noida", "UP", "201301", "776-655-4433", "neha.g@example.com");
+        Contact c7 = new Contact("Sanjay", "Kumar", "45 RS Puram", "Coimbatore", "TN", "641002", "912-345-6780", "sanjay.k@example.com");
+        Contact c8 = new Contact("Divya", "Menon", "67 Marine Drive", "Kochi", "KL", "682031", "823-456-7891", "divya.m@example.com");
+        Contact c9 = new Contact("Amit", "Desai", "89 SG Highway", "Ahmedabad", "GJ", "380015", "934-567-8912", "amit.desai@example.com");
+        Contact c10 = new Contact("Sneha", "Joshi", "23 FC Road", "Pune", "MH", "411004", "845-678-9123", "sneha.joshi@example.com");
         addressBook.addContact(c1);
         addressBook.addContact(c2);
+        addressBook.addContact(c3);
+        addressBook.addContact(c4);
+        addressBook.addContact(c5);
+        addressBook.addContact(c6);
+        addressBook.addContact(c7);
+        addressBook.addContact(c8);
+        addressBook.addContact(c9);
+        addressBook.addContact(c10);
         addressBook.display();
         System.out.println("Successfully Created!!!");
     }
@@ -55,6 +71,15 @@ public class AddressBookMain {
         addressBook.deleteContactUsingName(firstName, lastName);
     }
 
+    public void searchPersonByCityOrState_AddressBook(String city, String state){
+        for(String name : addressBookMap.keySet()){
+            AddressBook addressBook = system.getAddressBook(name);
+            if(!addressBook.searchBasedOnCityOrState(city,state)){
+                System.out.println("!!!Not Found Any Contacts in '"+name+"' AddressBook in that particular City,State!!!");
+            }
+        }
+    }
+
     public void displayAddresBook(){
         int i = 1;
         for(String name : addressBookMap.keySet()){
@@ -68,12 +93,12 @@ public class AddressBookMain {
     public static void main(String[] args) {
         System.out.println("===Wecome to Address Book System===");
 
-        AddressBookMain system = new AddressBookMain();
 
         while(true){
             System.out.println("1. Add AddressBook");
             System.out.println("2. Perform Opertions on Particular Address Book");
-            System.out.println("3. Exit the Program...");
+            System.out.println("3. Search Person based on City or State");
+            System.out.println("4. Exit the Program...");
             System.out.println("Enter ur Choice: ");
             int choice = sc.nextInt();
             String name;
@@ -85,17 +110,25 @@ public class AddressBookMain {
                     break;
                 case 2:
                     system.displayAddresBook();
+                    System.out.println("Enter a Address Book Name");
                     name = sc.next();
-                    system.optionsToSelect(system, name);
+                    system.optionsToSelect(name);
                     break;
                 case 3:
+                    System.out.println("Enter a State Name to Search" );
+                    String state = sc.next();
+                    System.out.println("Enter a City Name to Search" );
+                    String city = sc.next();
+                    system.searchPersonByCityOrState_AddressBook(city, state);
+                    break;
+                case 4:
                     return;
             }
         }
 
     }
 
-    public void optionsToSelect(AddressBookMain system,String name){
+    public void optionsToSelect(String name){
         while (true) {
             System.out.println("1. Add Contact in '"+name+"' AddressBook");
             System.out.println("2. Edit Contact using their name from '"+name+"'");

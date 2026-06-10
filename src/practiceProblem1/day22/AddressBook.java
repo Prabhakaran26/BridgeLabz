@@ -103,6 +103,18 @@ public class AddressBook {
         System.out.println("Cotact Not Found while trying to delete");
     }
 
+    public boolean searchBasedOnCityOrState(String city, String state){
+        boolean flag = false;
+        for(Contact c : contacts){
+            if(c.getCity().toLowerCase().equals(city.toLowerCase()) ||
+            c.getState().toLowerCase().equals(state.toLowerCase())){
+                System.out.println(c);
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
 
     public void display(){
         for(Contact c : contacts){

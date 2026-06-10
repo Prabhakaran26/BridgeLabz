@@ -26,7 +26,7 @@ public class AddressBook {
         System.out.println("Contact Not Found while trying to edit!!!");
     }
 
-    public void editing(Contact contact){
+    private void editing(Contact contact){
         boolean flag = true;
         while(flag){
             System.out.println("1. First Name");
@@ -37,6 +37,7 @@ public class AddressBook {
             System.out.println("6. Zip");
             System.out.println("7. Phone Number");
             System.out.println("8. Email");
+            System.out.println("Enter ur Choice : ");
             int choice = sc.nextInt();
 
             switch (choice){
@@ -101,6 +102,7 @@ public class AddressBook {
         }
         System.out.println("Cotact Not Found while trying to delete");
     }
+
 
     public void display(){
         for(Contact c : contacts){

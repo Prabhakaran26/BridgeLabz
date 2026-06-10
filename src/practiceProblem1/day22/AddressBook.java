@@ -104,11 +104,13 @@ public class AddressBook {
         System.out.println("Cotact Not Found while trying to delete");
     }
 
-    /*public void searchBasedOnCityOrState(String city, String state){
-        contacts.stream()
-                .filter(c -> c.getState().toLowerCase().equals(state.toLowerCase()) || c.getCity().toLowerCase().equals(city.toLowerCase()))
-                .forEach(c -> System.out.println(c));
-    }*/
+    public void countBasedOnCityOrState(String city, String state){
+        int cityCount = 0, stateCount = 0;
+        cityCount = (int)contacts.stream().filter(c -> c.getCity().toLowerCase().equals(city)).toList().stream().count();
+        System.out.println("City("+city+") : "+cityCount);
+        stateCount = (int)contacts.stream().filter(c -> c.getState().toLowerCase().equals(state)).toList().stream().count();
+        System.out.println("State("+state+") : "+stateCount);
+    }
 
     public List<Contact> searchBasedOnCityOrStateToStore(String city, String state){
         return  contacts.stream()

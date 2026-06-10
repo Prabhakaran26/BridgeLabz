@@ -22,7 +22,12 @@ public class AddressBookMain {
 
 
     public AddressBook getAddressBook(String key){
-        return addressBookMap.get(key);
+        if(addressBookMap.get(key) != null) {
+            return addressBookMap.get(key);
+        } else {
+            System.out.println("InValid Name!!!");
+            return null;
+        }
     }
 
     public void addContact(String name){
@@ -71,12 +76,12 @@ public class AddressBookMain {
         addressBook.deleteContactUsingName(firstName, lastName);
     }
 
-    /*public void searchPersonByCityOrState_AddressBook(String city, String state){
+    public void countPersonByCityOrState_AddressBook(String city, String state){
         for(String name : addressBookMap.keySet()){
             AddressBook addressBook = system.getAddressBook(name);
-            addressBook.searchBasedOnCityOrState(city,state);
+            addressBook.countBasedOnCityOrState(city,state);
         }
-    }*/
+    }
 
     public void searchBasedOnCityOrStateToStore(String city, String state){
 
@@ -123,7 +128,8 @@ public class AddressBookMain {
             System.out.println("2. Perform Opertions on Particular Address Book");
             System.out.println("3. Search Person based on City or State");
             System.out.println("4. To See the Storing Value of City and State");
-            System.out.println("5. Exit the Program...");
+            System.out.println("5. To See the Count of City and State");
+            System.out.println("6. Exit the Program...");
             System.out.println("Enter ur Choice: ");
             int choice = sc.nextInt();
             String name, city, state;
@@ -137,6 +143,9 @@ public class AddressBookMain {
                     system.displayAddresBook();
                     System.out.println("Enter a Address Book Name");
                     name = sc.next();
+                    if(system.getAddressBook(name) == null){
+                        break;
+                    }
                     system.optionsToSelect(name);
                     break;
                 case 3:
@@ -155,6 +164,14 @@ public class AddressBookMain {
                     system.displayCityOrStateList(city, state);
                     break;
                 case 5:
+                    System.out.println("Enter city :");
+                    city = sc.next().toLowerCase();
+                    System.out.println("Enter State: ");
+                    state = sc.next().toLowerCase();
+                    System.out.println("Displaying the Count of City and State based Persons");
+                    system.countPersonByCityOrState_AddressBook(city, state);
+                    break;
+                case 6:
                     return;
             }
         }

@@ -39,6 +39,9 @@ public class AddressBookMain {
         addressBook.addContact(c2);
 
         addressBook.editContactUsingName("John","Doe");
+        addressBook.display();
+
+        addressBook.deleteContactUsingName("Jane","Smith");
 
         addressBook.display();
 

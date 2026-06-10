@@ -23,7 +23,7 @@ public class AddressBook {
                 return;
             }
         }
-        System.out.println("Contact Not Found!!!");
+        System.out.println("Contact Not Found while trying to edit!!!");
     }
 
     public void editing(Contact contact){
@@ -90,6 +90,16 @@ public class AddressBook {
             }
 
         }
+    }
+
+    public void deleteContactUsingName(String firstName, String lastName){
+        for(Contact c : contacts){
+            if(c.getFirstName().equals(firstName) && c.getLastName().equals(lastName)){
+                contacts.remove(c);
+                return;
+            }
+        }
+        System.out.println("Cotact Not Found while trying to delete");
     }
 
     public void display(){

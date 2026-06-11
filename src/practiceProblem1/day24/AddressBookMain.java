@@ -112,12 +112,12 @@ public class AddressBookMain {
 
     public void sortBasedOnName(String name){
         AddressBook addressBook = system.getAddressBook(name);
-
-        System.out.println("Enter First Name : ");
-        String firstName = sc.next();
-        System.out.println("Enter Last Name: ");
-        String lastName = sc.next();
         addressBook.sortBasedOnName();
+    }
+
+    public void sortBasedOnCityStateZip(String name){
+        AddressBook addressBook = getAddressBook(name);
+        addressBook.sortBasedOnCityStateZip();
     }
 
     public void displayAddresBook(){
@@ -195,7 +195,7 @@ public class AddressBookMain {
             System.out.println("2. Edit Contact using their name from '"+name+"'");
             System.out.println("3. Delete Contact using their name from '"+name+"'");
             System.out.println("4. To sort Based on Name's");
-            System.out.println("5. Working......");
+            System.out.println("5. To sort Based on City,State or Zip");
             System.out.println("6. Exit");
             System.out.println("Enter ur Choice : ");
             int choice = sc.nextInt();
@@ -213,6 +213,7 @@ public class AddressBookMain {
                     system.sortBasedOnName(name);
                     break;
                 case 5:
+                    sortBasedOnCityStateZip(name);
                     break;
                 case 6:
                     return;

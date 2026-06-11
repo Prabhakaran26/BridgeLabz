@@ -125,6 +125,11 @@ public class AddressBook {
                 .forEach(c -> System.out.println(c));
     }
 
+    public void sortBasedOnCityStateZip(){
+        contacts.stream().sorted(Comparator.comparing(Contact::getCity).thenComparing(Contact::getState).thenComparing(Contact::getZip))
+                .forEach(c -> System.out.println(c));
+    }
+
 
     public void display(){
         for(Contact c : contacts){
